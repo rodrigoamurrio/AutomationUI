@@ -16,12 +16,6 @@ public class ServerConfig {
     private final String NO_ENVIRONMENT = " ";
 
     @Getter
-    private Integer port;
-
-    @Getter
-    private Integer websocketPort;
-
-    @Getter
     private String url;
 
     private Properties properties;
@@ -38,34 +32,26 @@ public class ServerConfig {
         switch (environment) {
             case QA_ENVIRONMENT:
                 this.url = getProperties().getProperty("environment.qa");
-                this.port = Integer.parseInt(getProperties().getProperty("port"));
-                this.websocketPort = Integer.parseInt(getProperties().getProperty("websocketPort.qa"));
                 break;
             case DEV_ENVIRONMENT:
                 this.url = getProperties().getProperty("environment.dev");
-                this.port = Integer.parseInt(getProperties().getProperty("port"));
                 break;
             case TEST_ENVIRONMENT:
                 this.url = getProperties().getProperty("environment.test");
-                this.port = Integer.parseInt(getProperties().getProperty("port"));
-                this.websocketPort = Integer.parseInt(getProperties().getProperty("websocketPort.test"));
                 break;
             case STAGING_ENVIRONMENT:
                 this.url = getProperties().getProperty("environment.staging");
-                this.port = Integer.parseInt(getProperties().getProperty("port"));
-                this.websocketPort = Integer.parseInt(getProperties().getProperty("websocketPort.test"));
                 break;
             default:
                 this.url = getProperties().getProperty("environment.default");
-                this.port = Integer.parseInt(getProperties().getProperty("port"));
-                this.websocketPort = Integer.parseInt(getProperties().getProperty("websocketPort.default"));
+                break;
         }
     }
 
     private Properties getProperties() {
         if (properties == null) {
             properties = new Properties();
-            try (InputStream input = new FileInputStream("src/test/resources/environment.properties")) {
+            try (InputStream input = new FileInputStream("src/test/resources/init.properties")) {
                 // load a properties file
                 properties.load(input);
             } catch (IOException ex) {

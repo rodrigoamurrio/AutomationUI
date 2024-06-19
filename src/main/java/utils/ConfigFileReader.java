@@ -45,4 +45,12 @@ public class  ConfigFileReader {
             throw new RuntimeException("The browser is not recognized");
     }
 
+    public String getUrl() {
+        String applicationUrl = properties.getProperty("browser");
+        if (applicationUrl != null)
+            return applicationUrl;
+        else
+            throw new RuntimeException("The browser is not recognized");
+    }
+
 }

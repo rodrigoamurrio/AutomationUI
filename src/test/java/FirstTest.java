@@ -1,23 +1,47 @@
-import Workflow.WorkflowTest;
 import common.BasePage;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import workflow.homePage.WorkflowTests;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FirstTest extends BasePage {
 
-    WorkflowTest workflowTest = new WorkflowTest();
+    public WorkflowTests workflowTests;
 
-    @Test
-    public void searchTextTest() throws InterruptedException {
-
-        workflowTest.searchTextAtGoogle("pinguino");
-        Thread.sleep(3000);
+    @BeforeEach
+    public void startup(){
+        workflowTests = new WorkflowTests();
     }
 
-    @After
-    public void tearDownTest(){
+    @Test
+    public void purchaseNokiaCellPhone() throws InterruptedException {
 
-        workflowTest.driver.closeDriver();
+        List<String> cellPhoneList = new ArrayList<>();
+        cellPhoneList.add("Nokia");
+        workflowTests.goToTheShopTab();
+        workflowTests.selectProduct(cellPhoneList);
+        Thread.sleep(10000);
+
+    }
+
+    @Test
+    public void purchaseTwoCellPhone() throws InterruptedException {
+
+        List<String> cellPhoneList = new ArrayList<>();
+        cellPhoneList.add("Nokia");
+        cellPhoneList.add("Samsung");
+        workflowTests.goToTheShopTab();
+        workflowTests.selectProduct(cellPhoneList);
+        Thread.sleep(10000);
+
+    }
+
+    @AfterEach
+    public void tearDownTest(){
+       workflowTests.driver.closeDriver();
     }
 
 

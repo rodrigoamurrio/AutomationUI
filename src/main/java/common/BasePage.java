@@ -29,7 +29,7 @@ public abstract class BasePage {
     }
 
     protected void waitForElementClickable(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(pageDriver.driver, 30);
+        WebDriverWait wait = new WebDriverWait(pageDriver.driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
